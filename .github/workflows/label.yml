@@ -9,6 +9,7 @@ jobs:
   stale:
       runs-on: ubuntu-latest
       steps:
+      - uses: actions/checkout@v2 
       - name: Commit and push if changed  
         run: 
           wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u  &&
