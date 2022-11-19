@@ -11,11 +11,11 @@ jobs:
       steps:
       - name: Commit and push if changed  
         run: 
-          wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u
-          sed -i 's/192.168.123.1:23234/192.168.50.1:8012/g' IPTV-Unicom.m3u
-          git diff
-          git config --global user.email "frtmelody@gmail.com"
-          git config --global user.name "frtmelody"
-          git add README.md
-          git commit -m "Github Action Auto Updated"
+          wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u  &&
+          sed -i 's/192.168.123.1:23234/192.168.50.1:8012/g' IPTV-Unicom.m3u  &&
+          git diff  &&
+          git config --global user.email "frtmelody@gmail.com" &&
+          git config --global user.name "frtmelody"  &&
+          git add IPTV-Unicom.m3u && 
+          git commit -m "Github Action Auto Updated" &&
           git push
