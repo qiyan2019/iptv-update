@@ -1,0 +1,13 @@
+- name: Cron Labeler
+  # You may pin to the exact commit or the version.
+  # uses: fjeremic/cron-labeler@640daafc8ea7f2b94acdfbcc4845e150571aea85
+  uses: fjeremic/cron-labeler@0.3.0
+  with:
+    # The GITHUB_TOKEN secret
+    repo-token: # optional
+    # The path for the label configurations
+    configuration-path: # optional, default is .github/labeler.yml
+    # Determines whether the action should skip labelling pull requests which have labels already present
+    skip-labeled-prs: # optional, default is true
+    # The maximum number of operations per run, used to control rate limiting
+    operations-per-run: # optional, default is 30
