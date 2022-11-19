@@ -1,13 +1,21 @@
-- name: Cron Labeler
-  # You may pin to the exact commit or the version.
-  # uses: fjeremic/cron-labeler@640daafc8ea7f2b94acdfbcc4845e150571aea85
-  uses: fjeremic/cron-labeler@0.3.0
-  with:
-    # The GITHUB_TOKEN secret
-    repo-token: # optional
-    # The path for the label configurations
-    configuration-path: # optional, default is .github/labeler.yml
-    # Determines whether the action should skip labelling pull requests which have labels already present
-    skip-labeled-prs: # optional, default is true
-    # The maximum number of operations per run, used to control rate limiting
-    operations-per-run: # optional, default is 30
+name: 'update'
+
+on:
+  push:
+  schedule:
+    - cron: '0/30 * * * *'
+
+jobs:
+  stale:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Commit and push if changed  
+        run: 
+          wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u
+          sed -i 's/192.168.123.1:23234/192.168.50.1:8012/g' IPTV-Unicom.m3u
+          git diff
+          git config --global user.email "frtmelody@gmail.com"
+          git config --global user.name "frtmelody"
+          git add README.md
+          git commit -m "Github Action Auto Updated"
+          git push
