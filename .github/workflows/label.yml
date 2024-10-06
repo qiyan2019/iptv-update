@@ -13,7 +13,7 @@ jobs:
       - name: Commit and push if changed  
         run: 
           wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u  &&
-          sed -i 's/192.168.123.1:23234/192.168.50.1:8012/g' IPTV-Unicom.m3u  &&
+          sed -i 's/192.168.123.1:23234/192.168.50.32:4022/g' IPTV-Unicom.m3u  &&
           git diff  &&
           git config --global user.email "frtmelody@gmail.com" &&
           git config --global user.name "frtmelody"  &&
