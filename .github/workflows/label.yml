@@ -1,22 +1,30 @@
-name: 'update'
+name: update
 
 on:
   push:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 每天 0 点跑一次
 
 jobs:
   stale:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2 
-      - name: Commit and push if changed  
-        run: 
-          wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u  &&
-          sed -i 's/192.168.123.1:23234/192.168.50.32:4022/g' IPTV-Unicom.m3u  &&
-          git diff  &&
-          git config --global user.email "frtmelody@gmail.com" &&
-          git config --global user.name "frtmelody"  &&
-          git add IPTV-Unicom.m3u && 
-          git commit -m "Github Action Auto Updated" &&
-          git push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update IPTV-Unicom.m3u
+        run: |
+          wget https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u -O IPTV-Unicom.m3u
+          sed -i 's/192.168.123.1:23234/192.168.50.32:4022/g' IPTV-Unicom.m3u
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "frtmelody@gmail.com"
+          git config --global user.name "frtmelody"
+
+          if ! git diff --quiet; then
+            git add IPTV-Unicom.m3u
+            git commit -m "Github Action Auto Updated"
+            git push
+          else
+            echo "✅ No changes to commit"
+          fi
